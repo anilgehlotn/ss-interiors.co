@@ -243,6 +243,172 @@
 //   );
 // }
 
+// import { useState } from "react";
+// import { Link, useLocation } from "react-router-dom";
+// import { Menu, X, Phone } from "lucide-react";
+
+// const navLinks = [
+//   { label: "Home", to: "/" },
+//   { label: "Services", to: "/services" },
+//   { label: "About", to: "/about" },
+//   { label: "Portfolio", to: "/portfolio" },
+//   { label: "Contact", to: "/contact" },
+// ];
+
+// export default function Navbar() {
+//   const [mobileOpen, setMobileOpen] = useState(false);
+//   const { pathname } = useLocation();
+
+//   return (
+//     <nav
+//       id="main-navbar"
+//       className="fixed inset-x-3 top-3 z-50 sm:inset-x-6 sm:top-4 lg:inset-x-12 lg:top-6"
+//     >
+//       {/* Floating glass pill */}
+//       <div className="mx-auto flex max-w-[1320px] items-center justify-between rounded-full border border-white/10 bg-charcoal-950/80 px-5 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.45)] backdrop-blur-xl lg:px-8">
+//         {/* Logo */}
+//         <Link
+//           to="/"
+//           id="navbar-logo"
+//           className="font-serif text-lg font-bold tracking-[0.2em] text-white transition-colors hover:text-gold-400 sm:text-xl"
+//         >
+//           S S INTERIORS
+//         </Link>
+
+//         {/* Desktop Nav Links */}
+//         <ul className="hidden items-center gap-7 lg:flex">
+//           {navLinks.map((link) => {
+//             const isActive = pathname === link.to;
+//             return (
+//               <li key={link.label}>
+//                 <Link
+//                   to={link.to}
+//                   className={`nav-link font-sans text-[12px] font-medium uppercase tracking-[0.15em] transition-colors hover:text-white ${
+//                     isActive ? "text-gold-400" : "text-white/75"
+//                   }`}
+//                 >
+//                   {link.label}
+//                 </Link>
+//               </li>
+//             );
+//           })}
+//         </ul>
+
+//         {/* Phone + CTA + Hamburger */}
+//         <div className="flex items-center gap-3">
+//           <a
+//             href="tel:+919980802384"
+//             id="navbar-phone"
+//             className="hidden items-center gap-2 rounded-full border border-white/15 px-4 py-2 font-sans text-[12px] font-medium tracking-wide text-white/75 transition-colors hover:border-gold-400/40 hover:text-gold-400 md:flex"
+//           >
+//             <Phone size={13} strokeWidth={1.5} />
+//             +91 99808 02384
+//           </a>
+
+//           <Link
+//             to="/contact"
+//             className="hidden items-center rounded-full bg-gold-400 px-5 py-2 font-sans text-[12px] font-semibold uppercase tracking-[0.1em] text-charcoal-950 transition-colors hover:bg-gold-300 sm:inline-flex"
+//           >
+//             Enquire Now
+//           </Link>
+
+//           {/* Mobile hamburger — z-[60] so it floats above the drawer panel */}
+//           <button
+//             id="navbar-hamburger"
+//             onClick={() => setMobileOpen((v) => !v)}
+//             className="relative z-[60] flex h-10 w-10 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 lg:hidden"
+//             aria-label="Toggle navigation menu"
+//             aria-expanded={mobileOpen}
+//           >
+//             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+//           </button>
+//         </div>
+//       </div>
+
+//       {/* Mobile Drawer */}
+//       <div
+//         className={`fixed inset-0 z-40 lg:hidden transition-all duration-500 ${
+//           mobileOpen
+//             ? "pointer-events-auto opacity-100"
+//             : "pointer-events-none opacity-0"
+//         }`}
+//       >
+//         {/* Backdrop */}
+//         <div
+//           className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+//           onClick={() => setMobileOpen(false)}
+//         />
+
+//         {/* Drawer Panel */}
+//         <div
+//           className={`absolute right-0 top-0 h-full w-[280px] rounded-l-3xl bg-charcoal-950/95 backdrop-blur-xl shadow-[-8px_0_40px_rgba(0,0,0,0.5)] transition-transform duration-500 ease-out ${
+//             mobileOpen ? "translate-x-0" : "translate-x-full"
+//           }`}
+//         >
+//           {/* Close button inside drawer (redundant but friendly UX) */}
+//           <div className="flex justify-end px-6 pt-6">
+//             <button
+//               onClick={() => setMobileOpen(false)}
+//               className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/50 transition-colors hover:text-white"
+//               aria-label="Close menu"
+//             >
+//               <X size={16} />
+//             </button>
+//           </div>
+
+//           <div className="flex flex-col gap-1 px-8 pt-6">
+//             {navLinks.map((link, i) => {
+//               const isActive = pathname === link.to;
+//               return (
+//                 <Link
+//                   key={link.label}
+//                   to={link.to}
+//                   onClick={() => setMobileOpen(false)}
+//                   className={`border-b border-white/5 py-4 font-sans text-[15px] font-medium uppercase tracking-[0.15em] transition-colors hover:text-gold-400 ${
+//                     isActive ? "text-gold-400" : "text-white/70"
+//                   }`}
+//                   style={{
+//                     transitionDelay: mobileOpen ? `${i * 60}ms` : "0ms",
+//                     opacity: mobileOpen ? 1 : 0,
+//                     transform: mobileOpen ? "translateX(0)" : "translateX(12px)",
+//                     transition: `color 200ms, opacity 400ms ${i * 60}ms ease-out, transform 400ms ${i * 60}ms ease-out`,
+//                   }}
+//                 >
+//                   {link.label}
+//                 </Link>
+//               );
+//             })}
+
+//             <Link
+//               to="/contact"
+//               onClick={() => setMobileOpen(false)}
+//               className="mt-6 flex items-center justify-center rounded-full bg-gold-400 px-5 py-3 font-sans text-[13px] font-semibold uppercase tracking-[0.1em] text-charcoal-950 transition-colors active:bg-gold-300"
+//               style={{
+//                 opacity: mobileOpen ? 1 : 0,
+//                 transform: mobileOpen ? "translateY(0)" : "translateY(8px)",
+//                 transition: `opacity 400ms ${navLinks.length * 60 + 40}ms ease-out, transform 400ms ${navLinks.length * 60 + 40}ms ease-out`,
+//               }}
+//             >
+//               Enquire Now
+//             </Link>
+
+//             <a
+//               href="tel:+919980802384"
+//               className="mt-4 flex items-center gap-2 font-sans text-[13px] font-medium tracking-wide text-gold-400"
+//               style={{
+//                 opacity: mobileOpen ? 1 : 0,
+//                 transition: `opacity 400ms ${navLinks.length * 60 + 100}ms ease-out`,
+//               }}
+//             >
+//               <Phone size={14} strokeWidth={1.5} />
+//               +91 99808 02384
+//             </a>
+//           </div>
+//         </div>
+//       </div>
+//     </nav>
+//   );
+// }
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
@@ -265,14 +431,14 @@ export default function Navbar() {
       className="fixed inset-x-3 top-3 z-50 sm:inset-x-6 sm:top-4 lg:inset-x-12 lg:top-6"
     >
       {/* Floating glass pill */}
-      <div className="mx-auto flex max-w-[1320px] items-center justify-between rounded-full border border-white/10 bg-charcoal-950/80 px-5 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.45)] backdrop-blur-xl lg:px-8">
-        {/* Logo */}
+      <div className="mx-auto flex max-w-[1320px] items-center justify-between rounded-full border border-white/10 bg-charcoal-950/80 px-4 py-2.5 shadow-[0_8px_30px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:px-5 sm:py-3 lg:px-8">
+        {/* Logo — nowrap so it never breaks to two lines */}
         <Link
           to="/"
           id="navbar-logo"
-          className="font-serif text-lg font-bold tracking-[0.2em] text-white transition-colors hover:text-gold-400 sm:text-xl"
+          className="whitespace-nowrap font-serif text-base font-bold tracking-[0.18em] text-white transition-colors hover:text-gold-400 sm:text-lg lg:text-xl"
         >
-          S S INTERIORS
+          SS INTERIORS
         </Link>
 
         {/* Desktop Nav Links */}
@@ -294,8 +460,9 @@ export default function Navbar() {
           })}
         </ul>
 
-        {/* Phone + CTA + Hamburger */}
-        <div className="flex items-center gap-3">
+        {/* Right side */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Phone — md and up only */}
           <a
             href="tel:+919980802384"
             id="navbar-phone"
@@ -305,27 +472,28 @@ export default function Navbar() {
             +91 99808 02384
           </a>
 
+          {/* Enquire — hidden on mobile, show sm+ */}
           <Link
             to="/contact"
-            className="hidden items-center rounded-full bg-gold-400 px-5 py-2 font-sans text-[12px] font-semibold uppercase tracking-[0.1em] text-charcoal-950 transition-colors hover:bg-gold-300 sm:inline-flex"
+            className="hidden rounded-full bg-gold-400 px-4 py-2 font-sans text-[11px] font-semibold uppercase tracking-[0.1em] text-charcoal-950 transition-colors hover:bg-gold-300 sm:inline-flex sm:items-center sm:px-5 sm:text-[12px]"
           >
             Enquire Now
           </Link>
 
-          {/* Mobile hamburger — z-[60] so it floats above the drawer panel */}
+          {/* Hamburger — z-[60] floats above drawer */}
           <button
             id="navbar-hamburger"
             onClick={() => setMobileOpen((v) => !v)}
-            className="relative z-[60] flex h-10 w-10 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 lg:hidden"
+            className="relative z-[60] flex h-9 w-9 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 lg:hidden"
             aria-label="Toggle navigation menu"
             aria-expanded={mobileOpen}
           >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer overlay */}
       <div
         className={`fixed inset-0 z-40 lg:hidden transition-all duration-500 ${
           mobileOpen
@@ -341,12 +509,12 @@ export default function Navbar() {
 
         {/* Drawer Panel */}
         <div
-          className={`absolute right-0 top-0 h-full w-[280px] rounded-l-3xl bg-charcoal-950/95 backdrop-blur-xl shadow-[-8px_0_40px_rgba(0,0,0,0.5)] transition-transform duration-500 ease-out ${
+          className={`absolute right-0 top-0 h-full w-[72vw] max-w-[300px] rounded-l-3xl bg-charcoal-950/95 backdrop-blur-xl shadow-[-8px_0_40px_rgba(0,0,0,0.5)] transition-transform duration-500 ease-out ${
             mobileOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          {/* Close button inside drawer (redundant but friendly UX) */}
-          <div className="flex justify-end px-6 pt-6">
+          {/* Close button */}
+          <div className="flex justify-end px-5 pt-5">
             <button
               onClick={() => setMobileOpen(false)}
               className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/50 transition-colors hover:text-white"
@@ -356,7 +524,13 @@ export default function Navbar() {
             </button>
           </div>
 
-          <div className="flex flex-col gap-1 px-8 pt-6">
+          {/* Brand inside drawer */}
+          <p className="px-7 pt-2 font-serif text-sm font-bold tracking-[0.18em] text-white/30">
+            SS INTERIORS
+          </p>
+
+          {/* Nav links */}
+          <div className="mt-6 flex flex-col px-7">
             {navLinks.map((link, i) => {
               const isActive = pathname === link.to;
               return (
@@ -364,29 +538,31 @@ export default function Navbar() {
                   key={link.label}
                   to={link.to}
                   onClick={() => setMobileOpen(false)}
-                  className={`border-b border-white/5 py-4 font-sans text-[15px] font-medium uppercase tracking-[0.15em] transition-colors hover:text-gold-400 ${
+                  className={`border-b border-white/5 py-4 font-sans text-[14px] font-medium uppercase tracking-[0.15em] transition-colors hover:text-gold-400 ${
                     isActive ? "text-gold-400" : "text-white/70"
                   }`}
                   style={{
-                    transitionDelay: mobileOpen ? `${i * 60}ms` : "0ms",
                     opacity: mobileOpen ? 1 : 0,
                     transform: mobileOpen ? "translateX(0)" : "translateX(12px)",
-                    transition: `color 200ms, opacity 400ms ${i * 60}ms ease-out, transform 400ms ${i * 60}ms ease-out`,
+                    transition: `color 200ms, opacity 400ms ${i * 55}ms ease-out, transform 400ms ${i * 55}ms ease-out`,
                   }}
                 >
                   {link.label}
                 </Link>
               );
             })}
+          </div>
 
+          {/* CTA + Phone */}
+          <div className="mt-8 flex flex-col gap-4 px-7">
             <Link
               to="/contact"
               onClick={() => setMobileOpen(false)}
-              className="mt-6 flex items-center justify-center rounded-full bg-gold-400 px-5 py-3 font-sans text-[13px] font-semibold uppercase tracking-[0.1em] text-charcoal-950 transition-colors active:bg-gold-300"
+              className="flex items-center justify-center rounded-full bg-gold-400 py-3 font-sans text-[13px] font-semibold uppercase tracking-[0.1em] text-charcoal-950 transition-colors active:bg-gold-300"
               style={{
                 opacity: mobileOpen ? 1 : 0,
                 transform: mobileOpen ? "translateY(0)" : "translateY(8px)",
-                transition: `opacity 400ms ${navLinks.length * 60 + 40}ms ease-out, transform 400ms ${navLinks.length * 60 + 40}ms ease-out`,
+                transition: `opacity 400ms ${navLinks.length * 55 + 40}ms ease-out, transform 400ms ${navLinks.length * 55 + 40}ms ease-out`,
               }}
             >
               Enquire Now
@@ -394,10 +570,10 @@ export default function Navbar() {
 
             <a
               href="tel:+919980802384"
-              className="mt-4 flex items-center gap-2 font-sans text-[13px] font-medium tracking-wide text-gold-400"
+              className="flex items-center justify-center gap-2 font-sans text-[13px] font-medium tracking-wide text-gold-400"
               style={{
                 opacity: mobileOpen ? 1 : 0,
-                transition: `opacity 400ms ${navLinks.length * 60 + 100}ms ease-out`,
+                transition: `opacity 400ms ${navLinks.length * 55 + 100}ms ease-out`,
               }}
             >
               <Phone size={14} strokeWidth={1.5} />
