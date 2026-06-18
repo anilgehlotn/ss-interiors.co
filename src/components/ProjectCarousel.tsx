@@ -413,6 +413,306 @@
 //   );
 // }
 
+// import { useEffect, useRef, useState } from "react";
+// import { motion } from "framer-motion";
+
+// type Project = {
+//   id: number;
+//   title: string;
+//   category: string;
+//   type: "A" | "B";
+//   imageUrl: string;
+//   heading?: string;
+//   description?: string;
+//   location?: string;
+//   year?: string;
+// };
+
+// const projectsData: Project[] = [
+//   {
+//     id: 1,
+//     title: "Villa Koramangala",
+//     category: "RESIDENTIAL",
+//     type: "A",
+//     heading: "CRAFTED FOR LUXURY LIVING",
+//     description: "A serene villa wrapped in warm oak, travertine and curated art.",
+//     location: "Koramangala, Bangalore",
+//     year: "2024",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80",
+//   },
+//   {
+//     id: 2,
+//     title: "Penthouse Indiranagar",
+//     category: "RESIDENTIAL",
+//     type: "B",
+//     description: "Sky-lit penthouse blending Italian marble with handcrafted wood.",
+//     location: "Indiranagar, Bangalore",
+//     year: "2024",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=80",
+//   },
+//   {
+//     id: 3,
+//     title: "Studio Office MG Road",
+//     category: "COMMERCIAL",
+//     type: "A",
+//     heading: "WHERE WORK MEETS DESIGN",
+//     description: "A studio designed around natural light, acoustics and focus.",
+//     location: "MG Road, Bangalore",
+//     year: "2023",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80",
+//   },
+//   {
+//     id: 4,
+//     title: "Residence Jayanagar",
+//     category: "RESIDENTIAL",
+//     type: "B",
+//     description: "Quiet family home with arched silhouettes and soft neutrals.",
+//     location: "Jayanagar, Bangalore",
+//     year: "2023",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=900&q=80",
+//   },
+//   {
+//     id: 5,
+//     title: "The Whitefield Bungalow",
+//     category: "RESIDENTIAL",
+//     type: "A",
+//     heading: "TIMELESS ELEGANCE REDEFINED",
+//     description: "Heritage-inspired bungalow with sculptural lighting and brass accents.",
+//     location: "Whitefield, Bangalore",
+//     year: "2025",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=900&q=80",
+//   },
+//   {
+//     id: 6,
+//     title: "Commercial Lobby HSR",
+//     category: "COMMERCIAL",
+//     type: "B",
+//     description: "A grand lobby balancing stone, greenery and ambient warmth.",
+//     location: "HSR Layout, Bangalore",
+//     year: "2025",
+//     imageUrl:
+//       "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=900&q=80",
+//   },
+// ];
+
+// function ProjectCard({ project, index }: { project: Project; index: number }) {
+//   return (
+//     <motion.div
+//       initial={{ opacity: 0, y: 30 }}
+//       whileInView={{ opacity: 1, y: 0 }}
+//       viewport={{ once: true, amount: 0.2 }}
+//       transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
+//       className="shrink-0 transition-all duration-500 ease-out origin-center group-hover/strip:scale-90 group-hover/strip:opacity-50 hover:!scale-110 hover:!opacity-100 hover:z-10"
+//       style={{ width: 380 }}
+//     >
+//       {project.type === "A" ? (
+//         <div className="group relative overflow-hidden rounded-[20px]" style={{ height: 520 }}>
+//           <div className="absolute inset-0 overflow-hidden">
+//             <img
+//               src={project.imageUrl}
+//               alt={project.title}
+//               className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+//             />
+//           </div>
+//           <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent transition-opacity duration-500 group-hover:from-black/90" />
+//           <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+//             <p
+//               className="mb-2 text-[10px] tracking-[0.2em] text-white/80"
+//               style={{ fontFamily: "var(--font-sans)" }}
+//             >
+//               {project.category} · {project.year}
+//             </p>
+//             <h3
+//               className="font-black uppercase leading-tight text-white"
+//               style={{ fontSize: 26, fontFamily: "var(--font-serif)" }}
+//             >
+//               {project.heading}
+//             </h3>
+//             <div className="grid max-h-0 grid-rows-[0fr] overflow-hidden transition-all duration-500 ease-out group-hover:max-h-40 group-hover:grid-rows-[1fr]">
+//               <div className="min-h-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+//                 <p
+//                   className="mt-3 text-sm leading-relaxed text-white/90"
+//                   style={{ fontFamily: "var(--font-sans)" }}
+//                 >
+//                   {project.description}
+//                 </p>
+//                 <p
+//                   className="mt-2 text-[11px] tracking-wider text-white/70"
+//                   style={{ fontFamily: "var(--font-sans)" }}
+//                 >
+//                   {project.location}
+//                 </p>
+//                 <button
+//                   className="mt-4 rounded-full bg-white px-5 py-2 text-xs font-semibold text-neutral-900 shadow-md transition-transform hover:scale-105"
+//                   style={{ fontFamily: "var(--font-sans)" }}
+//                 >
+//                   Open Project ↗
+//                 </button>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       ) : (
+//         <div>
+//           <div className="group relative overflow-hidden rounded-[20px]" style={{ height: 520 }}>
+//             <img
+//               src={project.imageUrl}
+//               alt={project.title}
+//               className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
+//             />
+//             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+//             <div className="absolute inset-x-0 bottom-0 translate-y-3 p-6 text-white opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100">
+//               <p
+//                 className="mb-1 text-[10px] tracking-[0.2em] text-white/80"
+//                 style={{ fontFamily: "var(--font-sans)" }}
+//               >
+//                 {project.category} · {project.year}
+//               </p>
+//               <h3
+//                 className="text-xl leading-tight text-white"
+//                 style={{ fontFamily: "var(--font-serif)", fontWeight: 600 }}
+//               >
+//                 {project.title}
+//               </h3>
+//               <p
+//                 className="mt-2 text-sm leading-relaxed text-white/90"
+//                 style={{ fontFamily: "var(--font-sans)" }}
+//               >
+//                 {project.description}
+//               </p>
+//               <p
+//                 className="mt-1 text-[11px] tracking-wider text-white/70"
+//                 style={{ fontFamily: "var(--font-sans)" }}
+//               >
+//                 {project.location}
+//               </p>
+//             </div>
+//           </div>
+//           <div className="mt-4 flex items-center justify-between px-1">
+//             <div>
+//               <p
+//                 className="text-base font-medium text-neutral-900"
+//                 style={{ fontFamily: "var(--font-serif)" }}
+//               >
+//                 {project.title}
+//               </p>
+//               <p
+//                 className="mt-1 text-[10px] tracking-widest text-neutral-500"
+//                 style={{ fontFamily: "var(--font-sans)" }}
+//               >
+//                 {project.category}
+//               </p>
+//             </div>
+//             <span
+//               className="rounded-full text-white"
+//               style={{
+//                 backgroundColor: "#C9A84C",
+//                 fontSize: 11,
+//                 padding: "3px 10px",
+//                 fontFamily: "var(--font-sans)",
+//               }}
+//             >
+//               New
+//             </span>
+//           </div>
+//         </div>
+//       )}
+//     </motion.div>
+//   );
+// }
+
+// export default function PortfolioShowcase() {
+//   const wrapperRef = useRef<HTMLDivElement>(null);
+//   const [offset, setOffset] = useState(0);
+
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       const el = wrapperRef.current;
+//       if (!el) return;
+//       const rect = el.getBoundingClientRect();
+//       const start = window.scrollY + rect.top;
+//       const progress = Math.max(0, window.scrollY - start);
+//       setOffset(progress * 0.4);
+//     };
+//     handleScroll();
+//     window.addEventListener("scroll", handleScroll, { passive: true });
+//     return () => window.removeEventListener("scroll", handleScroll);
+//   }, []);
+
+//   return (
+//     <div ref={wrapperRef} style={{ height: "300vh" }} className="bg-white">
+//       <div className="sticky top-0 h-screen w-full overflow-hidden bg-white">
+//         {/* Navbar */}
+//         <div
+//           className="flex items-center justify-end px-10 pt-6"
+//           style={{ fontFamily: "var(--font-sans)" }}
+//         >
+//           <a
+//             href="#"
+//             className="text-sm font-medium text-neutral-900 transition-opacity hover:opacity-60"
+//           >
+//             View All Projects ↗
+//           </a>
+//         </div>
+
+//         {/* Cards strip */}
+//         <div
+//           className="flex items-center"
+//           style={{ height: "calc(100vh - 80px)", paddingTop: 24 }}
+//         >
+//           <motion.div
+//             initial={{ x: 80, opacity: 0 }}
+//             animate={{ x: 0, opacity: 1 }}
+//             transition={{ duration: 1, ease: "easeOut" }}
+//             style={{ width: "100%" }}
+//           >
+//             <div className="mb-8 flex items-end justify-between px-[60px]">
+//               <h2
+//                 className="text-neutral-900"
+//                 style={{
+//                   fontFamily: "var(--font-serif)",
+//                   fontSize: 64,
+//                   lineHeight: 1,
+//                   letterSpacing: "-0.02em",
+//                   fontWeight: 500,
+//                 }}
+//               >
+//                 Spaces, <em className="italic" style={{ color: "#C9A84C" }}>softly</em> composed.
+//               </h2>
+//               <p
+//                 className="max-w-xs text-sm leading-relaxed text-neutral-600"
+//                 style={{ fontFamily: "var(--font-sans)" }}
+//               >
+//                 An evolving archive of interiors built around light, material
+//                 and a slower way of living — drift through, at your own pace.
+//               </p>
+//             </div>
+//             <div
+//               className="flex group/strip"
+//               style={{
+//                 gap: 20,
+//                 padding: "0 60px",
+//                 transform: `translateX(-${offset}px)`,
+//                 transition: "transform 0.08s linear",
+//                 willChange: "transform",
+//               }}
+//             >
+//               {projectsData.map((p, i) => (
+//                 <ProjectCard key={p.id} project={p} index={i} />
+//               ))}
+//             </div>
+//           </motion.div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
@@ -500,7 +800,128 @@ const projectsData: Project[] = [
   },
 ];
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+// Mobile card — always shows info below, no hover tricks
+function MobileProjectCard({ project, index }: { project: Project; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.55, delay: index * 0.08, ease: "easeOut" }}
+      className="w-full"
+    >
+      {project.type === "A" ? (
+        <div className="group relative overflow-hidden rounded-2xl" style={{ height: 420 }}>
+          <img
+            src={project.imageUrl}
+            alt={project.title}
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+            <p
+              className="mb-1 text-[10px] tracking-[0.2em] text-white/75"
+              style={{ fontFamily: "var(--font-sans)" }}
+            >
+              {project.category} · {project.year}
+            </p>
+            <h3
+              className="font-black uppercase leading-tight text-white"
+              style={{ fontSize: 22, fontFamily: "var(--font-serif)" }}
+            >
+              {project.heading}
+            </h3>
+            <p
+              className="mt-2 text-sm leading-relaxed text-white/85"
+              style={{ fontFamily: "var(--font-sans)" }}
+            >
+              {project.description}
+            </p>
+            <p
+              className="mt-1 text-[11px] tracking-wider text-white/65"
+              style={{ fontFamily: "var(--font-sans)" }}
+            >
+              {project.location}
+            </p>
+            <button
+              className="mt-4 rounded-full bg-white px-5 py-2 text-xs font-semibold text-neutral-900 shadow-md active:scale-95 transition-transform"
+              style={{ fontFamily: "var(--font-sans)" }}
+            >
+              Open Project ↗
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div className="relative overflow-hidden rounded-2xl" style={{ height: 420 }}>
+            <img
+              src={project.imageUrl}
+              alt={project.title}
+              className="h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+              <p
+                className="mb-1 text-[10px] tracking-[0.2em] text-white/75"
+                style={{ fontFamily: "var(--font-sans)" }}
+              >
+                {project.category} · {project.year}
+              </p>
+              <h3
+                className="text-xl leading-tight text-white"
+                style={{ fontFamily: "var(--font-serif)", fontWeight: 600 }}
+              >
+                {project.title}
+              </h3>
+              <p
+                className="mt-2 text-sm leading-relaxed text-white/85"
+                style={{ fontFamily: "var(--font-sans)" }}
+              >
+                {project.description}
+              </p>
+              <p
+                className="mt-1 text-[11px] tracking-wider text-white/65"
+                style={{ fontFamily: "var(--font-sans)" }}
+              >
+                {project.location}
+              </p>
+            </div>
+          </div>
+          <div className="mt-3 flex items-center justify-between px-1">
+            <div>
+              <p
+                className="text-base font-medium text-neutral-900"
+                style={{ fontFamily: "var(--font-serif)" }}
+              >
+                {project.title}
+              </p>
+              <p
+                className="mt-0.5 text-[10px] tracking-widest text-neutral-500"
+                style={{ fontFamily: "var(--font-sans)" }}
+              >
+                {project.category}
+              </p>
+            </div>
+            <span
+              className="rounded-full text-white"
+              style={{
+                backgroundColor: "#C9A84C",
+                fontSize: 11,
+                padding: "3px 10px",
+                fontFamily: "var(--font-sans)",
+              }}
+            >
+              New
+            </span>
+          </div>
+        </div>
+      )}
+    </motion.div>
+  );
+}
+
+// Desktop card — original hover behaviour
+function DesktopProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -629,8 +1050,17 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 export default function PortfolioShowcase() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [offset, setOffset] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
     const handleScroll = () => {
       const el = wrapperRef.current;
       if (!el) return;
@@ -642,8 +1072,67 @@ export default function PortfolioShowcase() {
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isMobile]);
 
+  // ── MOBILE LAYOUT ──────────────────────────────────────────────
+  if (isMobile) {
+    return (
+      <div className="bg-white">
+        {/* Header */}
+        <div className="px-5 pt-10 pb-6">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="text-neutral-900"
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: 36,
+              lineHeight: 1.1,
+              letterSpacing: "-0.02em",
+              fontWeight: 500,
+            }}
+          >
+            Spaces,{" "}
+            <em className="italic" style={{ color: "#C9A84C" }}>
+              softly
+            </em>{" "}
+            composed.
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
+            className="mt-3 text-sm leading-relaxed text-neutral-500"
+            style={{ fontFamily: "var(--font-sans)" }}
+          >
+            An evolving archive of interiors built around light, material and a slower way of
+            living.
+          </motion.p>
+        </div>
+
+        {/* Cards — single column, full width */}
+        <div className="flex flex-col gap-8 px-5 pb-16">
+          {projectsData.map((p, i) => (
+            <MobileProjectCard key={p.id} project={p} index={i} />
+          ))}
+        </div>
+
+        {/* Footer CTA */}
+        <div className="border-t border-neutral-100 px-5 py-8 text-center">
+          <a
+            href="#"
+            className="text-sm font-medium text-neutral-900 underline underline-offset-4 decoration-[#C9A84C]"
+            style={{ fontFamily: "var(--font-sans)" }}
+          >
+            View All Projects ↗
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  // ── DESKTOP LAYOUT (original) ──────────────────────────────────
   return (
     <div ref={wrapperRef} style={{ height: "300vh" }} className="bg-white">
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-white">
@@ -682,14 +1171,18 @@ export default function PortfolioShowcase() {
                   fontWeight: 500,
                 }}
               >
-                Spaces, <em className="italic" style={{ color: "#C9A84C" }}>softly</em> composed.
+                Spaces,{" "}
+                <em className="italic" style={{ color: "#C9A84C" }}>
+                  softly
+                </em>{" "}
+                composed.
               </h2>
               <p
                 className="max-w-xs text-sm leading-relaxed text-neutral-600"
                 style={{ fontFamily: "var(--font-sans)" }}
               >
-                An evolving archive of interiors built around light, material
-                and a slower way of living — drift through, at your own pace.
+                An evolving archive of interiors built around light, material and a slower way of
+                living — drift through, at your own pace.
               </p>
             </div>
             <div
@@ -703,7 +1196,7 @@ export default function PortfolioShowcase() {
               }}
             >
               {projectsData.map((p, i) => (
-                <ProjectCard key={p.id} project={p} index={i} />
+                <DesktopProjectCard key={p.id} project={p} index={i} />
               ))}
             </div>
           </motion.div>
